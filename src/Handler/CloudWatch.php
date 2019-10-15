@@ -280,7 +280,8 @@ class CloudWatch extends AbstractProcessingHandler
 	    }
 	    catch (CloudWatchLogsException $e)
 	    {
-		    if (in_array($e->getAwsErrorCode(), ['InvalidSequenceTokenException', 'DataAlreadyAcceptedException'], true))
+		    if (in_array($e->getAwsErrorType(), ['InvalidSequenceTokenException', 'DataAlreadyAcceptedException'], true) ||
+		        in_array($e->getAwsErrorCode(), ['InvalidSequenceTokenException', 'DataAlreadyAcceptedException'], true))
 		    {
 			    $tokenAttempt++;
 			    // try to get token again if attempt count is less than allowed retries
